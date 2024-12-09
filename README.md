@@ -48,7 +48,7 @@ docker run -d \
   lscr.io/linuxserver/ombi:latest
 ```
 
-### SSO Docker
+#### SSO Docker
 
 - Now, you can proceed to create the SSO bypass Docker container for Ombi. 
 - Fill in the information you copied earlier and run Docker as shown below:
@@ -60,14 +60,14 @@ sudo docker run -d -p 5000:5000 \
   -e CLIENT_ID="Azure_Client_ID" \
   -e CLIENT_SECRET="Azure_Secret" \
   -e TENANT_ID="Azure_Tenant_ID" \
-  -e REDIRECT_URI="https://sso-url/callback" \
+  -e REDIRECT_URI="https://sso-url/callback" \ #addres to sso container - sso-ombi.domain.com
   -e AUTHORIZATION_URL="https://login.microsoftonline.com/Azure_Tenant_ID/oauth2/v2.0/authorize" \
   -e TOKEN_URL="https://login.microsoftonline.com/Azure_Tenant_ID/oauth2/v2.0/token" \
   -e API_KEY="Ombi_API_Key" \
   -e OMBI_LOGIN_URL="https://ombi_url" \   #main ombi page - ombi.domain.com
   -e OMBI_DOCKER_IP="172.18.0.10" \
   -e OMBI_PORT="3579" \
-  -e BASE_DOMAIN="base_domain" \  #min domain - domain.com
+  -e BASE_DOMAIN="base_domain" \  #main domain - domain.com
   --net ombi_network \
   --ip 172.18.0.11 \
   --restart unless-stopped \
