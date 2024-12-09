@@ -43,7 +43,7 @@ docker run -d \
   -e TZ=Etc/UTC \
   -p 3579:3579 \
   -v /patch/to/config:/config \
-  -v /path/to_index/index.html:/app/ombi/ClientApp/dist/index.html \
+  -v /path/to_index/index.html:/app/ombi/ClientApp/dist/index.html \   #get index from this repo
   --restart unless-stopped \
   lscr.io/linuxserver/ombi:latest
 ```
