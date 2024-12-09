@@ -52,6 +52,7 @@ docker run -d \
 
 - Now, you can proceed to create the SSO bypass Docker container for Ombi. 
 - Fill in the information you copied earlier and run Docker as shown below:
+- Docker url: https://hub.docker.com/repository/docker/dadmins/ombi-sso/general
 
 ```bash
 sudo docker run -d -p 5000:5000 \
