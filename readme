@@ -1,0 +1,32 @@
+docker network create --subnet=172.18.0.0/16 ombi_network
+
+docker run -d \
+  --name=ombi \
+  --net ombi_network \
+  --ip 172.18.0.10 \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Etc/UTC \
+  -p 3579:3579 \
+  -v /patch/to/config:/config \
+  -v /path/to_index/index.html:/app/ombi/ClientApp/dist/index.html \
+  --restart unless-stopped \
+  lscr.io/linuxserver/ombi:latest
+
+sudo docker run -d -p 5000:5000 \
+  --name=sso_ombi \
+  -e CLIENT_ID="Azure_Client_ID" \
+  -e CLIENT_SECRET="Azure_Secret" \
+  -e TENANT_ID="Azure_Tenant_ID" \
+  -e REDIRECT_URI="https://sso-url/callback" \
+  -e AUTHORIZATION_URL="https://login.microsoftonline.com/Azure_Tenant_ID/oauth2/v2.0/authorize" \
+  -e TOKEN_URL="https://login.microsoftonline.com/Azure_Tenant_ID/oauth2/v2.0/token" \
+  -e API_KEY="Ombi_API_Key" \
+  -e OMBI_LOGIN_URL="https://ombi_url" \
+  -e OMBI_DOCKER_IP="172.18.0.10" \
+  -e OMBI_PORT="3579" \
+  -e BASE_DOMAIN="base_domain" \
+  --net ombi_network \
+  --ip 172.18.0.11 \
+  --restart unless-stopped \
+ dadmins/ombi-sso
