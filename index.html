@@ -35,7 +35,7 @@ let idToken = getCookie('id_token');
 if (idToken) {
 localStorage.setItem('id_token', idToken);
 } else {
-window.location.href = "https://sso-url";
+window.location.href = "https://sso-url"; <!-- remove or comment for a first time -->
 }
 </script>
       
